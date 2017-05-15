@@ -1,4 +1,4 @@
 class Plane {
- public:
+ public:  //
   COORD x, y;
 };

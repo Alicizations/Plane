@@ -116,12 +116,6 @@ main.cpp:27
 
 -----
 
-main.cpp:32
-
-`console->cursorctl->Gotoxy(0, 0);`
-
------
-
 main.cpp:45
 
 `time(&last_time);`

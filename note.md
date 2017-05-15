@@ -66,3 +66,77 @@ console.hpp:27
 
 若在线程执行完之后，没有调用CloseHandle，在进程执行期间，将会造成内核对象的泄露，相当于句柄泄露，但不同于内存泄露，这势必会对系统的效率带来一定程度上的负面影响。但当进程结束退出后，系统会自动清理这些资源。  
 
+------
+
+console.hpp:31
+
+`CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);`
+
+声明于wincon.h中，用于创建控制台屏幕缓冲区。
+
+参数1:控制台屏幕缓冲区的权限。值有如下两种：
+
+GENERIC_READ (0x80000000L)
+请求控制台屏幕缓冲区的读取权限，使进程可以从缓冲区读取数据。
+GENERIC_WRITE (0x40000000L)
+请求控制台屏幕缓冲区的写权限，使进程可以从缓冲区写入数据。
+
+其他参数参考:
+http://baike.baidu.com/link?url=nz64L3bDsx8U_VmFYG_YQfBrcTzdbzj4ghTEheEU-8Ax_GFY5X8CG8es_XA0wA1N2OxZ0o5tFsoyRnkImUbqwkSbAWWxsNo-_CvwF9mFkQQhjaA69_82nmFHMTwAe0t7
+
+------
+
+console.hpp:36
+
+`SetConsoleActiveScreenBuffer(_console)`
+
+将指定的屏幕缓冲区设置为当前显示的控制台屏幕缓冲区
+
+------
+
+console.hpp:40
+
+`WriteConsole(_console, str, strlen(str), &last_written, NULL);`
+
+它用来从当前光标位置写入一个字符串到屏幕缓冲区。
+
+参数1:控制台屏幕缓冲区的句柄(要有GENERIC_WRITE权限)
+参数2:要写入的字符指针
+参数3:要写入的字符数
+参数4:存储字符数的变量指针
+参数5:保留,为NULL
+
+-----
+
+main.cpp:27
+
+`keystate = GetKeyState(0x41);`
+
+该函数检取指定虚拟键的状态。该状态指定此键是UP状态，DOWN状态，还是被触发的（开关每次按下此键时进行切换）。0x41 = 'A'
+
+-----
+
+main.cpp:32
+
+`console->cursorctl->Gotoxy(0, 0);`
+
+-----
+
+main.cpp:45
+
+`time(&last_time);`
+
+功能: 获取当前的系统时间，返回的结果是一个time_t类型(long)
+
+-----
+
+main.cpp:47
+
+`Sleep(100);`
+
+延时,单位是ms
+
+-----
+
+
+
